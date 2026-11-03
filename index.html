@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>채원 · 서비스기획 포트폴리오</title>
+<meta name="description" content="문제 정의부터 해결안 구체화, 사용자 관점의 정보 설계까지 — 서비스기획 대표 활동 3개">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#fff; --ink:#111; --muted:#8a8a8a; --soft:#b9b9b9; --line:#ececec; --chip:#f4f4f2;
+  --yellow:#f5c518; --dark:#141414; --r-lg:24px; --r-md:18px; --r-sm:12px;
+  --wrap:1180px; --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+.wrap{width:min(var(--wrap),100% - 48px);margin-inline:auto}
+.gray{color:var(--soft)}
+.eyebrow{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+h1,h2,h3{letter-spacing:-.035em;line-height:1.08;font-weight:700}
+h2.section-title{font-size:clamp(36px,5.2vw,64px);margin-bottom:48px}
+
+/* ---------- Header (sticky) ---------- */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid transparent;transition:border-color .3s}
+.header.scrolled{border-color:var(--line)}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.03em}
+.logo small{font-weight:500;color:var(--muted);font-size:13px;margin-left:8px;letter-spacing:0}
+.nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500}
+.nav a.link{color:#444;transition:color .25s}
+.nav a.link:hover{color:var(--ink)}
+.contact-btn{display:inline-flex;align-items:center;gap:10px;background:var(--chip);padding:10px 18px;border-radius:999px;font-weight:600}
+.dot{position:relative;width:9px;height:9px;border-radius:50%;background:var(--yellow);flex:none}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--yellow);animation:halo 1.8s ease-in-out infinite;transition:opacity .2s}
+@keyframes halo{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(2.4);opacity:0}}
+.contact-btn:hover .dot::after{animation:none;opacity:0}
+.menu-toggle{display:none;width:40px;height:40px;border-radius:50%;background:var(--chip);align-items:center;justify-content:center}
+.menu-toggle span{display:block;width:16px;height:2px;background:var(--ink);position:relative;transition:transform .3s var(--ease)}
+.menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;left:0;width:16px;height:2px;background:var(--ink);transition:transform .3s var(--ease),top .3s}
+.menu-toggle span::before{top:-5px}.menu-toggle span::after{top:5px}
+.menu-open .menu-toggle span{background:transparent}
+.menu-open .menu-toggle span::before{top:0;transform:rotate(45deg)}
+.menu-open .menu-toggle span::after{top:0;transform:rotate(-45deg)}
+
+/* ---------- Pill button ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:999px;padding:16px 26px;font-weight:600;font-size:16px}
+.btn .btn-inner{display:inline-flex;align-items:center;gap:10px;transition:transform .3s var(--ease)}
+.btn:hover .btn-inner{transform:translateX(-2px)}
+.btn.light{background:#fff;color:var(--ink)}
+
+/* ---------- Arrow link (See-live style) ---------- */
+.arrow-link{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15px}
+.arrow-link .t{transition:transform .3s var(--ease),opacity .3s}
+.arrow-link svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.arrow-link:hover .t{transform:translateX(-2px);opacity:.7}
+.arrow-link:hover svg{transform:translate(2px,-2px)}
+
+/* ---------- Hero ---------- */
+.hero{padding:40px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center}
+.carousel{position:relative;aspect-ratio:4/4.6;border-radius:var(--r-lg);overflow:hidden;background:#eee}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;color:#fff}
+.slide.active{opacity:1}
+.slide .ph-label{font-size:12px;font-family:ui-monospace,Menlo,monospace;opacity:.75;margin-bottom:8px}
+.slide strong{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.03em;line-height:1.2}
+.g1{background:radial-gradient(120% 90% at 20% 10%,#ffe27a 0%,transparent 55%),linear-gradient(160deg,#2d2d2d,#0f0f0f)}
+.g2{background:radial-gradient(110% 80% at 80% 15%,#9fd3c7 0%,transparent 55%),linear-gradient(160deg,#2f3a38,#121716)}
+.g3{background:radial-gradient(110% 80% at 30% 20%,#ffd65c 0%,transparent 50%),linear-gradient(160deg,#3a3524,#151309)}
+.carousel-ui{position:absolute;left:28px;right:20px;top:20px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.dots{display:flex;gap:6px}
+.dots button{width:22px;height:4px;border-radius:4px;background:rgba(255,255,255,.35);transition:background .3s,width .3s}
+.dots button.on{background:#fff;width:34px}
+.next{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center;transition:transform .3s var(--ease)}
+.next:hover{transform:translateX(2px)}
+.next svg{width:16px;height:16px}
+.hero-copy .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.hero-copy h1{font-size:clamp(40px,5.4vw,72px);margin-bottom:26px}
+.hero-copy p.lead{font-size:18px;color:#555;max-width:520px;margin-bottom:34px}
+.usp{margin-top:38px;display:grid;gap:14px}
+.usp li{display:flex;align-items:center;gap:12px;font-weight:600}
+.check{width:24px;height:24px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;flex:none}
+.check svg{width:12px;height:12px}
+
+/* ---------- Marquee ---------- */
+.marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:scroll var(--dur,120s) linear infinite}
+.track>.set{display:flex;gap:16px;padding-right:16px}
+@keyframes scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.tags{padding:24px 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tags .label{text-align:center;margin-bottom:16px}
+.tag{white-space:nowrap;padding:12px 22px;border-radius:999px;background:var(--chip);font-weight:600;color:#555;font-size:15px}
+.tags .marquee{padding-bottom:18px}
+
+/* ---------- Work ---------- */
+section{padding:110px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{display:flex;flex-direction:column;gap:18px}
+.card.big{grid-column:span 2}
+.thumb{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/11;position:relative;display:flex;align-items:flex-end;padding:22px;color:#fff}
+.card.small .thumb{aspect-ratio:auto;flex:1;min-height:320px}
+.thumb .ph-label{font-size:12px;font-family:ui-monospace,Menlo,monospace;opacity:.8}
+.thumb.muted{background:repeating-linear-gradient(135deg,#f3f3f1 0 14px,#ecece9 14px 28px);color:#888}
+.badge{position:absolute;top:18px;left:18px;background:var(--yellow);color:var(--ink);font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+.badge.wait{background:#fff;color:#777;border:1px solid var(--line)}
+.card-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.card-meta h3{font-size:24px;line-height:1.25}
+.card-meta .sub{color:var(--muted);font-size:15px;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-size:13px;padding:6px 12px;border-radius:999px;background:var(--chip);color:#555;font-weight:600}
+.why{border-radius:var(--r-lg);background:var(--chip);padding:40px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.why h3{font-size:clamp(26px,3vw,38px)}
+.why ol{counter-reset:n;display:grid;gap:12px}
+.why ol li{counter-increment:n;display:flex;gap:14px;align-items:baseline;font-weight:600;font-size:17px}
+.why ol li::before{content:"0" counter(n);font-size:13px;color:var(--muted);font-weight:700}
+
+/* ---------- Case study ---------- */
+.case{padding-top:0}
+.case-box{border:1px solid var(--line);border-radius:var(--r-lg);padding:56px;display:grid;grid-template-columns:280px 1fr;gap:56px}
+.case-side .eyebrow{margin-bottom:12px}
+.case-side h3{font-size:30px;margin-bottom:12px}
+.case-side p{color:var(--muted)}
+.case-side .chips{margin-top:22px}
+.case-body h4{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.03em;line-height:1.3;margin-bottom:36px}
+.block{padding:24px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:24px}
+.block .k{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
+.block .k span{display:block;color:var(--ink);font-size:15px;letter-spacing:0;margin-top:2px}
+.block ul li{position:relative;padding-left:18px;margin-bottom:6px}
+.block ul li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+
+/* ---------- Competency marquee ---------- */
+.comp{padding:80px 0;background:#fafaf8}
+.comp .head{margin-bottom:40px}
+.comp-card{width:340px;flex:none;background:#fff;border-radius:var(--r-md);padding:28px;border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;white-space:normal}
+.comp-card .top{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.comp-card p{color:#555;font-size:15px}
+.comp-card .src{font-size:12px;color:var(--muted)}
+
+/* ---------- Dark CTA ---------- */
+.cta{padding:110px 0 0}
+.cta-panel{border-radius:32px;padding:clamp(48px,7vw,96px) clamp(28px,6vw,80px);color:#fff;background:radial-gradient(80% 120% at 85% 0%,rgba(245,197,24,.28),transparent 60%),radial-gradient(70% 100% at 0% 100%,rgba(255,255,255,.08),transparent 60%),linear-gradient(140deg,#1d1d1d,#0b0b0b);display:flex;flex-direction:column;gap:30px;align-items:flex-start;overflow:hidden}
+.cta-panel h2{font-size:clamp(34px,5vw,60px);max-width:820px}
+.cta-panel h2 .gray{color:#6f6f6f}
+.cta-panel .eyebrow{color:#9a9a9a;display:flex;align-items:center;gap:10px}
+
+/* ---------- Strengths ---------- */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.s-card{border-radius:var(--r-lg);border:1px solid var(--line);padding:40px;display:flex;flex-direction:column;gap:18px;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.s-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(0,0,0,.25)}
+.s-card .num{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:800}
+.s-card h3{font-size:26px;line-height:1.3}
+.s-card p{color:#555}
+
+/* ---------- About ---------- */
+.about{padding-top:0}
+.about p.big{font-size:clamp(26px,3.4vw,44px);font-weight:700;letter-spacing:-.035em;line-height:1.3;max-width:980px}
+
+/* ---------- FAQ ---------- */
+.faq .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:64px}
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;text-align:left;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.faq-icon{width:40px;height:40px;border-radius:50%;background:var(--chip);display:grid;place-items:center;flex:none;transition:background .35s ease,color .35s ease}
+.faq-icon svg{width:14px;height:14px;transition:transform .35s ease}
+.faq-item.open .faq-icon{background:#3a3a3a;color:#fff}
+.faq-item.open .faq-icon svg{transform:rotate(180deg)}
+.faq-a{height:0;overflow:hidden;transition:height .35s ease}
+.faq-a-inner{padding:0 60px 26px 0;color:#555}
+
+/* ---------- Footer ---------- */
+footer{padding:120px 0 40px}
+.lets{font-size:clamp(56px,11vw,160px);font-weight:800;letter-spacing:-.05em;line-height:1}
+.foot-row{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}
+
+/* ---------- Reveal (estimated) ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.hero-in{opacity:0;transform:translateY(16px);animation:heroIn .8s var(--ease) forwards}
+@keyframes heroIn{to{opacity:1;transform:none}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:991px){
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .carousel{aspect-ratio:4/3;order:2}
+  .grid{grid-template-columns:1fr 1fr}
+  .card.big{grid-column:span 2}
+  .case-box{grid-template-columns:1fr;gap:32px;padding:40px}
+  .faq .wrap{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:767px){
+  .nav{position:fixed;inset:72px 0 auto 0;background:#fff;flex-direction:column;align-items:flex-start;padding:24px;gap:20px;border-bottom:1px solid var(--line);transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease)}
+  .menu-open .nav{opacity:1;transform:none;pointer-events:auto}
+  .menu-toggle{display:inline-flex}
+  section{padding:80px 0}
+  .grid,.two{grid-template-columns:1fr}
+  .card.big{grid-column:auto}
+  .card.small .thumb{min-height:240px}
+  .block{grid-template-columns:1fr;gap:8px}
+  .case-box{padding:28px}
+  .why,.s-card{padding:28px}
+  .comp-card{width:280px}
+  .faq-a-inner{padding-right:0}
+  .card-meta{flex-direction:column}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .track{animation:none!important;flex-wrap:wrap}
+  .marquee{overflow-x:auto}
+  .dot::after{display:none}
+  .reveal,.hero-in{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="header" id="top">
+  <div class="wrap">
+    <a href="#top" class="logo">채원<small>서비스기획 포트폴리오</small></a>
+    <nav class="nav" id="nav">
+      <a class="link" href="#work">Work</a>
+      <a class="link" href="#strengths">Strengths</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="contact-btn" href="#cta"><span class="dot" aria-hidden="true"></span>Contact</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="carousel hero-in" id="carousel" aria-roledescription="carousel" style="animation-delay:.05s">
+      <div class="slide g1 active" aria-label="PROJECT 01">
+        <span class="ph-label">placeholder-project-01</span>
+        <strong>PROJECT 01<br>청년 금융교육 정책 기획</strong>
+      </div>
+      <div class="slide g2" aria-label="PROJECT 02">
+        <span class="ph-label">placeholder-project-02</span>
+        <strong>PROJECT 02<br>건강분과 회의 설계·운영</strong>
+      </div>
+      <div class="slide g3" aria-label="PROJECT 03">
+        <span class="ph-label">placeholder-project-03</span>
+        <strong>PROJECT 03<br>카카오워크 사용 가이드 제작</strong>
+      </div>
+      <div class="carousel-ui">
+        <div class="dots" id="dots"></div>
+        <button class="next" id="nextBtn" aria-label="다음 슬라이드">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow hero-in" style="animation-delay:.1s"><span class="dot" aria-hidden="true"></span>채원 · 서비스기획 포트폴리오</p>
+      <h1 class="hero-in" style="animation-delay:.18s">문제 정의부터 <span class="gray">해결안 구체화, 사용자 관점의 정보 설계까지</span></h1>
+      <p class="lead hero-in" style="animation-delay:.26s">서비스기획 신입 채용 담당자가 봤을 때 기획 역량이 가장 잘 드러나는 대표 활동 3개를 정리했습니다.</p>
+      <a class="btn hero-in" href="#work" style="animation-delay:.34s"><span class="btn-inner">대표 활동 보기 <span aria-hidden="true">→</span></span></a>
+      <ul class="usp hero-in" style="animation-delay:.42s">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>문제 정의</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>기획 문서 작성</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>결과 추적</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tag marquee ===== -->
+<div class="tags">
+  <p class="eyebrow label">활동 키워드</p>
+  <div class="marquee" data-speed="14">
+    <div class="track">
+      <div class="set">
+        <span class="tag">서울청년정책네트워크</span><span class="tag">정책제안팀장</span><span class="tag">청년 금융교육</span><span class="tag">서울시민참여예산</span><span class="tag">서울영테크</span><span class="tag">정책제안서</span><span class="tag">건강분과 회의 설계·운영</span><span class="tag">카카오워크 사용 가이드</span><span class="tag">문제 정의</span><span class="tag">기획 문서 작성</span><span class="tag">결과 추적</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Work ===== -->
+<section id="work">
+  <div class="wrap">
+    <h2 class="section-title reveal">대표 활동. <span class="gray">서로 다른 기획 역량을 보여주는 3가지</span></h2>
+    <div class="grid">
+      <article class="card big reveal">
+        <a href="#case" class="thumb g1" aria-label="PROJECT 01 자세히 보기">
+          <span class="badge">PROJECT 01</span>
+          <span class="ph-label">placeholder-project-01 · 대표 이미지 자리</span>
+        </a>
+        <div class="card-meta">
+          <div>
+            <h3>청년 금융교육 정책 기획</h3>
+            <p class="sub">2025년 서울청년정책네트워크 · 정책제안팀장</p>
+            <div class="chips"><span class="chip">문제 정의</span><span class="chip">기획 문서 작성</span><span class="chip">결과 추적</span></div>
+          </div>
+          <a class="arrow-link" href="#case"><span class="t">자세히 보기</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l6-6M5 4h5v5"/></svg></a>
+        </div>
+      </article>
+
+      <article class="card small reveal">
+        <div class="thumb muted">
+          <span class="badge wait">PROJECT 02 · 상세 준비 중</span>
+          <span class="ph-label">placeholder-project-02</span>
+        </div>
+        <div class="card-meta">
+          <div>
+            <h3>건강분과 회의 설계·운영</h3>
+            <p class="sub">상세 내용 준비 중</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card small reveal">
+        <div class="thumb muted">
+          <span class="badge wait">PROJECT 03 · 상세 준비 중</span>
+          <span class="ph-label">placeholder-project-03</span>
+        </div>
+        <div class="card-meta">
+          <div>
+            <h3>카카오워크 사용 가이드 제작</h3>
+            <p class="sub">상세 내용 준비 중</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card big reveal">
+        <div class="why">
+          <p class="eyebrow">이 조합을 고른 이유</p>
+          <h3>문제 정의부터 해결안 구체화, <span class="gray">사용자 관점의 정보 설계까지 서로 다른 역량</span></h3>
+          <ol>
+            <li>청년 금융교육 정책 기획</li>
+            <li>건강분과 회의 설계·운영</li>
+            <li>카카오워크 사용 가이드 제작</li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Case study P01 ===== -->
+<section class="case" id="case">
+  <div class="wrap">
+    <div class="case-box reveal">
+      <aside class="case-side">
+        <p class="eyebrow">PROJECT 01 · 문제 정의 · 기획 · 결과</p>
+        <h3>청년 금융교육 정책 기획</h3>
+        <p>2025년 서울청년정책네트워크 · 정책제안팀장</p>
+        <div class="chips"><span class="chip">문제 정의</span><span class="chip">기획 문서 작성</span><span class="chip">결과 추적</span></div>
+      </aside>
+      <div class="case-body">
+        <h4>01. 청년의 금융 자립을 위한 맞춤형 금융교육 제안</h4>
+        <div class="block"><p class="k">BACKGROUND<span>문제 정의</span></p><p>금융 지식 부족으로 자립에 어려움을 겪는 청년들을 위해 금융교육을 개선할 필요가 있다고 판단했습니다.</p></div>
+        <div class="block"><p class="k">ROLE<span>담당 역할</span></p><p>2년 연속 정책제안팀장으로 활동하며 정책 제안 과정을 관리했습니다.</p></div>
+        <div class="block"><p class="k">PROCESS<span>기획 과정</span></p><ul><li>청년 금융교육의 필요성을 바탕으로 정책 제안 방향 설정</li><li>정책제안서 작성 및 제안 내용 구체화</li><li>서울시민참여예산 사업 제안 절차 참여</li></ul></div>
+        <div class="block"><p class="k">RESULT<span>결과</span></p><ul><li>서울시민참여예산 사업 적격 판정 및 시민 대상 투표를 통한 선정</li><li>서울영테크 생애주기별 맞춤형 금융교육이 실제 2026년 청년정책으로 반영되어 하반기부터 운영</li></ul></div>
+        <div class="block"><p class="k">SERVICE PLANNING<span>서비스기획 역량</span></p><p>청년의 문제를 정책 과제로 구체화하고, 제안서라는 결과물로 발전시켰습니다. 아이디어 제안에 그치지 않고 실제 정책 반영 여부까지 확인한 경험입니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Competency marquee ===== -->
+<div class="comp">
+  <div class="wrap head"><h2 class="section-title reveal" style="margin-bottom:0">강조할 역량. <span class="gray">활동에서 드러난 기획 역량</span></h2></div>
+  <div class="marquee" data-speed="18">
+    <div class="track">
+      <div class="set">
+        <div class="comp-card"><div class="top"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>문제 정의</div><p>금융 지식 부족으로 자립에 어려움을 겪는 청년들을 위해 금융교육을 개선할 필요가 있다고 판단했습니다.</p><span class="src">PROJECT 01 · BACKGROUND</span></div>
+        <div class="comp-card"><div class="top"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>기획 문서 작성</div><p>정책제안서 작성 및 제안 내용 구체화</p><span class="src">PROJECT 01 · PROCESS</span></div>
+        <div class="comp-card"><div class="top"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>결과 추적</div><p>아이디어 제안에 그치지 않고 실제 정책 반영 여부까지 확인한 경험입니다.</p><span class="src">PROJECT 01 · SERVICE PLANNING</span></div>
+        <div class="comp-card"><div class="top"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>해결안 구체화</div><p>청년의 문제를 정책 과제로 구체화하고, 제안서라는 결과물로 발전시켰습니다.</p><span class="src">PROJECT 01 · SERVICE PLANNING</span></div>
+        <div class="comp-card"><div class="top"><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>사용자 관점의 정보 설계</div><p>카카오워크 사용 가이드 제작 — 상세 내용 준비 중</p><span class="src">PROJECT 03</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Dark CTA ===== -->
+<div class="cta" id="cta">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>PROJECT 01 · RESULT</p>
+      <h2>2026년 청년정책으로 반영. <span class="gray">서울영테크 생애주기별 맞춤형 금융교육, 하반기부터 운영</span></h2>
+      <a class="btn light" href="#case"><span class="btn-inner">케이스 스터디 보기 <span aria-hidden="true">→</span></span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Strengths ===== -->
+<section id="strengths">
+  <div class="wrap">
+    <h2 class="section-title reveal">서비스기획 역량. <span class="gray">PROJECT 01에서 확인한 두 가지</span></h2>
+    <div class="two">
+      <div class="s-card reveal"><span class="num">1</span><h3>청년의 문제를 정책 과제로 구체화</h3><p>청년의 문제를 정책 과제로 구체화하고, 제안서라는 결과물로 발전시켰습니다.</p></div>
+      <div class="s-card reveal"><span class="num">2</span><h3>실제 정책 반영 여부까지 확인</h3><p>아이디어 제안에 그치지 않고 실제 정책 반영 여부까지 확인한 경험입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="about">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="margin-bottom:18px">About</p>
+    <p class="big reveal">문제 정의부터 해결안 구체화, <span class="gray">사용자 관점의 정보 설계까지 서로 다른 역량을 보여줄 수 있는 대표 활동 3개를 선정했습니다.</span></p>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="section-title reveal">FAQ.<br><span class="gray">자주 묻는 질문</span></h2>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">PROJECT 01은 어떤 활동인가요?<span class="faq-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">2025년 서울청년정책네트워크에서 진행한 ‘청년의 금융 자립을 위한 맞춤형 금융교육 제안’입니다. 금융 지식 부족으로 자립에 어려움을 겪는 청년들을 위해 금융교육을 개선할 필요가 있다고 판단했습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">어떤 역할을 맡았나요?<span class="faq-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">2년 연속 정책제안팀장으로 활동하며 정책 제안 과정을 관리했습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">결과는 어땠나요?<span class="faq-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">서울시민참여예산 사업 적격 판정 및 시민 대상 투표를 통해 선정되었고, 서울영테크 생애주기별 맞춤형 금융교육이 실제 2026년 청년정책으로 반영되어 하반기부터 운영됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">왜 이 3개 활동을 골랐나요?<span class="faq-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">청년 금융교육 정책 기획, 건강분과 회의 설계·운영, 카카오워크 사용 가이드 제작은 문제 정의부터 해결안 구체화, 사용자 관점의 정보 설계까지 서로 다른 역량을 보여줄 수 있기 때문입니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">PROJECT 02·03의 상세 내용은요?<span class="faq-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">건강분과 회의 설계·운영, 카카오워크 사용 가이드 제작의 상세 내용은 준비 중입니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <p class="lets reveal">Let's Talk!</p>
+    <div class="foot-row">
+      <span>© 채원 · 서비스기획 포트폴리오</span>
+      <span>연락처는 포트폴리오 본문에 없어 생략했습니다.</span>
+      <a class="arrow-link" href="#top"><span class="t">맨 위로</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l6-6M5 4h5v5"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Sticky header border on scroll */
+  const header = document.querySelector('.header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* Mobile menu */
+  const toggle = document.getElementById('menuToggle');
+  toggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => {
+    document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', false);
+  }));
+
+  /* Hero carousel: crossfade, ~6s autoplay, next button, dots */
+  const slides = [...document.querySelectorAll('#carousel .slide')];
+  const dotsWrap = document.getElementById('dots');
+  let idx = 0, timer = null;
+  const dots = slides.map((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', `슬라이드 ${i + 1}`);
+    b.addEventListener('click', () => { go(i); restart(); });
+    dotsWrap.appendChild(b); return b;
+  });
+  function go(i) {
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+    dots.forEach((d, n) => d.classList.toggle('on', n === idx));
+  }
+  function restart() {
+    clearInterval(timer);
+    if (!reduce) timer = setInterval(() => go(idx + 1), 6000);
+  }
+  document.getElementById('nextBtn').addEventListener('click', () => { go(idx + 1); restart(); });
+  document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : restart());
+  go(0); restart();
+
+  /* Marquees: duplicate set for seamless loop, speed in px/s */
+  document.querySelectorAll('.marquee').forEach(m => {
+    const track = m.querySelector('.track');
+    const set = track.querySelector('.set');
+    if (reduce) return;
+    const clone = set.cloneNode(true); clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+    const setDur = () => {
+      const w = set.getBoundingClientRect().width;
+      track.style.setProperty('--dur', (w / (parseFloat(m.dataset.speed) || 14)) + 's');
+    };
+    setDur();
+    if (document.fonts) document.fonts.ready.then(setDur);
+    window.addEventListener('resize', setDur);
+  });
+
+  /* FAQ: exclusive accordion with height transition */
+  const items = [...document.querySelectorAll('.faq-item')];
+  function setOpen(item, open) {
+    const panel = item.querySelector('.faq-a');
+    const btn = item.querySelector('.faq-q');
+    btn.setAttribute('aria-expanded', open);
+    item.classList.toggle('open', open);
+    if (open) {
+      panel.style.height = panel.scrollHeight + 'px';
+      const end = e => { if (e.propertyName === 'height' && item.classList.contains('open')) panel.style.height = 'auto'; panel.removeEventListener('transitionend', end); };
+      panel.addEventListener('transitionend', end);
+      if (reduce) panel.style.height = 'auto';
+    } else {
+      panel.style.height = panel.scrollHeight + 'px';
+      panel.offsetHeight; // reflow
+      panel.style.height = '0px';
+    }
+  }
+  items.forEach(item => item.querySelector('.faq-q').addEventListener('click', () => {
+    const willOpen = !item.classList.contains('open');
+    items.forEach(o => { if (o !== item && o.classList.contains('open')) setOpen(o, false); });
+    setOpen(item, willOpen);
+  }));
+
+  /* Scroll reveal (estimated): fade-up once */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), {threshold: .12, rootMargin: '0px 0px -40px 0px'});
+    revealEls.forEach((el, i) => {
+      const sib = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains('reveal')).indexOf(el) : 0;
+      el.style.transitionDelay = Math.min(sib, 3) * 80 + 'ms';
+      io.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>

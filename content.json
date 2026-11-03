@@ -1,0 +1,59 @@
+{
+  "siteTitle": "서비스기획 포트폴리오",
+  "ownerName": "채원",
+  "tagline": "문제 정의부터 해결안 구체화, 사용자 관점의 정보 설계까지",
+  "intro": "서비스기획 신입 채용 담당자가 봤을 때 기획 역량이 가장 잘 드러나는 대표 활동 3개",
+  "projects": [
+    {
+      "id": "01",
+      "label": "PROJECT 01",
+      "title": "청년 금융교육 정책 기획",
+      "subtitle": "2025년 서울청년정책네트워크 · 정책제안팀장",
+      "headline": "01. 청년의 금융 자립을 위한 맞춤형 금융교육 제안",
+      "background": "금융 지식 부족으로 자립에 어려움을 겪는 청년들을 위해 금융교육을 개선할 필요가 있다고 판단했습니다.",
+      "role": "2년 연속 정책제안팀장으로 활동하며 정책 제안 과정을 관리했습니다.",
+      "process": [
+        "청년 금융교육의 필요성을 바탕으로 정책 제안 방향 설정",
+        "정책제안서 작성 및 제안 내용 구체화",
+        "서울시민참여예산 사업 제안 절차 참여"
+      ],
+      "result": [
+        "서울시민참여예산 사업 적격 판정 및 시민 대상 투표를 통한 선정",
+        "서울영테크 생애주기별 맞춤형 금융교육이 실제 2026년 청년정책으로 반영되어 하반기부터 운영"
+      ],
+      "servicePlanning": "청년의 문제를 정책 과제로 구체화하고, 제안서라는 결과물로 발전시켰습니다. 아이디어 제안에 그치지 않고 실제 정책 반영 여부까지 확인한 경험입니다.",
+      "skills": ["문제 정의", "기획 문서 작성", "결과 추적"],
+      "imageNote": "placeholder-project-01 (포트폴리오에 제공된 대표 이미지 자리; 외부 사이트 이미지는 사용하지 않음)"
+    },
+    {
+      "id": "02",
+      "label": "PROJECT 02",
+      "title": "건강분과 회의 설계·운영",
+      "subtitle": null,
+      "headline": null,
+      "background": null,
+      "role": null,
+      "process": [],
+      "result": [],
+      "servicePlanning": null,
+      "skills": [],
+      "imageNote": "placeholder-project-02 — 상세 본문이 입력에 없어 제목만 반영. 본문 제공 시 교체.",
+      "incomplete": true
+    },
+    {
+      "id": "03",
+      "label": "PROJECT 03",
+      "title": "카카오워크 사용 가이드 제작",
+      "subtitle": null,
+      "headline": null,
+      "background": null,
+      "role": null,
+      "process": [],
+      "result": [],
+      "servicePlanning": null,
+      "skills": [],
+      "imageNote": "placeholder-project-03 — 상세 본문이 입력에 없어 제목만 반영. 본문 제공 시 교체.",
+      "incomplete": true
+    }
+  ]
+}
